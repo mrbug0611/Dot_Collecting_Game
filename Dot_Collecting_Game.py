@@ -128,8 +128,7 @@ class Rectangle:
                     if e.key == K_BACKSPACE:
                         self.player = self.player[:-1]
                         screen.fill((0, 0, 0))
-
-
+                        
                     else:
                         self.player += e.unicode
                         self.click_value += 7
