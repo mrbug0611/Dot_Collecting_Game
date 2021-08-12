@@ -1,6 +1,7 @@
 # importing modules
 from pygame import *
 import random as rd
+import sys
 
 # Setting screen size variables and number of smaller dots
 screen_width = 1400
@@ -128,7 +129,7 @@ class Rectangle:
                     if e.key == K_BACKSPACE:
                         self.player = self.player[:-1]
                         screen.fill((0, 0, 0))
-                        
+
                     else:
                         self.player += e.unicode
                         self.click_value += 7
@@ -189,12 +190,12 @@ def title_screen_info(x, y):
     title_text = title_font.render("Fake Agar.io", True, (255, 255, 255))
     big_name_info_1 = big_info_font.render("Player 1 Nickname: ", True, (255, 255, 255))
     big_name_info_2 = big_info_font.render("Player 2 Nickname: ", True, (255, 255, 255))
-    enter_game_info = big_info_font.render("Click of the text box and press Enter to play ", True, (255, 255, 255))
+
 
     screen.blit(title_text, (x, y - 50))
     screen.blit(big_name_info_1, (x - 500, y + 70))
     screen.blit(big_name_info_2, (x - 500, y + 250))
-    screen.blit(enter_game_info, (x - 150, y + 600))
+
 
 
 # Showing who won the match
@@ -253,6 +254,7 @@ while True:
     for e in events:
         if e.type == QUIT:
             quit()
+            sys.exit()
     keys = key.get_pressed()
 
     # 1st big dot moving right
@@ -283,6 +285,8 @@ while True:
     # Starting the game
     if keys[K_RETURN]:
         entered = True
+        rect_1.active = False
+        rect_2.active = False
     # Restarting the game after a winner is declared
     if keys[K_r]:
         screen.fill((255, 255, 255))
@@ -331,7 +335,6 @@ while True:
         P2_Y_Change = 1
         P2_Y_Change = P2_Y_Change - slow_yy
         ball_2.move(P2_X_Change, +P2_Y_Change)
-
 
     # Activating what happens when the big dot picks up the smaller dot
     for dot in dots:
